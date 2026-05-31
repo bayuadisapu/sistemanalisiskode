@@ -422,16 +422,16 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS for Clean, Professional Hybrid Theme (Dark Sidebar + Light Main Canvas)
+# Custom CSS for Clean, Professional Gold Hybrid Theme (Dark Sidebar + Warm Gold Light Main Canvas)
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* Global Reset & Base Theme - Clean light Slate for main body */
+/* Global Reset & Base Theme - Warm Light Canvas for main body */
 html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     font-family: 'Inter', sans-serif !important;
-    background-color: #f8fafc !important; /* Tailwind Slate 50 */
-    color: #0f172a !important; /* Slate 900 */
+    background-color: #fdfbf7 !important; /* Warm luxury off-white */
+    color: #1a1a2e !important; /* Deep navy/charcoal for text */
 }
 
 /* ─────────────────────────────────────────────
@@ -462,14 +462,14 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     border-radius: 6px !important;
 }
 [data-testid="stSidebar"] input:focus {
-    border-color: #6366f1 !important; /* Indigo active border */
+    border-color: #d97706 !important; /* Luxury Gold active border */
 }
 [data-testid="stSidebar"] hr {
     border-color: #1e293b !important;
 }
 
 /* ─────────────────────────────────────────────
-   MAIN PAGE ELEMENT STYLING: LIGHT SaaS STYLE
+   MAIN PAGE ELEMENT STYLING: GOLD & LIGHT SaaS
    ───────────────────────────────────────────── */
 
 /* Make all main page input widget labels slate dark */
@@ -478,23 +478,24 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     font-weight: 500 !important;
 }
 
-/* Header Container - Clean & Simple Light Bordered */
+/* Header Container - Warm White with Gold Accent Line */
 .main-header {
     background-color: #ffffff;
-    border: 1px solid #e2e8f0; /* Slate 200 */
-    color: #0f172a;
+    border: 1px solid #e9e5db; /* Soft warm gray border */
+    border-left: 5px solid #d97706; /* Luxury Gold Brand Accent */
+    color: #1a1a2e;
     padding: 24px 32px;
     border-radius: 12px;
     margin-bottom: 25px;
     text-align: left;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 .main-header h1 {
     font-family: 'Inter', sans-serif !important;
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 6px;
-    color: #0f172a;
+    color: #1a1a2e;
 }
 .main-header p {
     opacity: 1;
@@ -535,14 +536,14 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     opacity: 0.85 !important; /* Ensure high visibility */
 }
 .stTextArea textarea:focus {
-    border-color: #4f46e5 !important; /* Indigo 600 */
+    border-color: #d97706 !important; /* Gold border on focus */
     box-shadow: none !important;
 }
 
-/* Minimalist Card Layout - Pure White SaaS style */
+/* Minimalist Card Layout - Pure White SaaS style with Warm Hover */
 .metric-card {
     background: #ffffff;
-    border: 1px solid #e2e8f0; /* Slate 200 */
+    border: 1px solid #e9e5db; /* Warm border */
     border-radius: 8px;
     padding: 16px;
     text-align: left;
@@ -550,14 +551,14 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 .metric-card:hover {
-    border-color: #4f46e5; /* Indigo 600 */
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.05);
+    border-color: #d97706; /* Luxury Gold brand color */
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.05);
 }
 .metric-card .val {
     font-family: 'Inter', sans-serif;
     font-size: 1.7rem;
     font-weight: 700;
-    color: #0f172a;
+    color: #1a1a2e;
 }
 .metric-card .lbl {
     font-size: 0.75rem;
@@ -573,23 +574,23 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     border-radius: 8px;
     padding: 20px;
     text-align: left;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e9e5db;
     background-color: #ffffff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .formula-box {
-    background: #f8fafc !important; /* Slate 50 */
-    border-left: 3px solid #4f46e5; /* Indigo 600 */
+    background: #fdfdfb !important; /* Soft white */
+    border-left: 3px solid #d97706; /* Luxury Gold brand accent */
     border-radius: 6px;
     padding: 12px 16px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     color: #334155;
     margin: 12px 0;
-    border-top: 1px solid #e2e8f0;
-    border-right: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
+    border-top: 1px solid #e9e5db;
+    border-right: 1px solid #e9e5db;
+    border-bottom: 1px solid #e9e5db;
 }
 
 .section-label {
@@ -602,13 +603,13 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     margin-bottom: 12px;
 }
 
-/* Tabs Styling - Light SaaS Minimalist */
+/* Tabs Styling - Warm Light SaaS Minimalist */
 .stTabs [data-baseweb="tab-list"] {
     gap: 4px;
-    background-color: #f1f5f9 !important; /* Slate 100 */
+    background-color: #f5f2eb !important; /* Soft warm gray background */
     padding: 4px;
     border-radius: 8px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e9e5db;
 }
 .stTabs [data-baseweb="tab"] {
     height: 36px !important;
@@ -622,19 +623,19 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     border: none !important;
 }
 .stTabs [data-baseweb="tab"]:hover {
-    color: #0f172a !important;
-    background-color: #e2e8f0 !important;
+    color: #1a1a2e !important;
+    background-color: #e9e5db !important;
 }
 .stTabs [aria-selected="true"] {
-    background-color: #ffffff !important;
-    color: #4f46e5 !important; /* Indigo 600 */
+    background-color: #d97706 !important; /* Active Gold background */
+    color: #ffffff !important; /* Crisp white text for active tab */
     font-weight: 600 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 4px rgba(217, 119, 6, 0.2) !important;
 }
 
-/* Buttons - Solid Minimalist */
+/* Buttons - Solid Gold Minimalist */
 .stButton button {
-    background: #4f46e5 !important; /* Indigo 600 */
+    background: #d97706 !important; /* Luxury Gold Brand Color */
     color: #ffffff !important;
     font-family: 'Inter', sans-serif !important;
     font-weight: 600 !important;
@@ -643,10 +644,10 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     padding: 8px 20px !important;
     font-size: 0.9rem !important;
     transition: background-color 0.2s ease !important;
-    box-shadow: none !important;
+    box-shadow: 0 2px 4px rgba(217, 119, 6, 0.1) !important;
 }
 .stButton button:hover {
-    background: #4338ca !important; /* Indigo 700 */
+    background: #b45309 !important; /* Darker Gold on hover */
     transform: none !important;
 }
 
@@ -654,7 +655,8 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
 div[data-testid="stHorizontalBlock"] div:nth-child(2) button {
     background: transparent !important;
     color: #64748b !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #e9e5db !important;
+    box-shadow: none !important;
 }
 div[data-testid="stHorizontalBlock"] div:nth-child(2) button:hover {
     border-color: #ef4444 !important;
@@ -662,7 +664,7 @@ div[data-testid="stHorizontalBlock"] div:nth-child(2) button:hover {
     background: rgba(239, 68, 68, 0.05) !important;
 }
 
-/* Clean Placeholder Panel - Pure White Bordered */
+/* Clean Placeholder Panel - Warm White Bordered */
 .waiting-card {
     border: 1px dashed #cbd5e1;
     padding: 48px 32px;
@@ -673,7 +675,7 @@ div[data-testid="stHorizontalBlock"] div:nth-child(2) button:hover {
 }
 .waiting-card h3 {
     font-family: 'Inter', sans-serif !important;
-    color: #0f172a;
+    color: #1a1a2e;
     font-weight: 600;
     font-size: 1.1rem;
 }
@@ -685,7 +687,7 @@ div[data-testid="stHorizontalBlock"] div:nth-child(2) button:hover {
 
 /* Tables styling */
 [data-testid="stDataFrame"] {
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #e9e5db !important;
     border-radius: 8px !important;
 }
 
@@ -927,7 +929,7 @@ with col_right:
                 
             st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
             st.markdown("#### Pratinjau Halaman Cetak Laporan:")
-            st.markdown(f"<div class='report-preview-container' style='border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;'>{html_report}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div class='report-preview-container' style='border: 1px solid #e9e5db; border-radius: 8px; overflow: hidden;'>{html_report}</div>", unsafe_allow_html=True)
 
     else:
         # Initial Placeholder design - Clean & Professional White Card
