@@ -710,19 +710,19 @@ div[data-testid="stHorizontalBlock"] div:nth-child(2) button:hover {
 st.markdown("""
 <div class="main-header">
   <h1>White Box Testing Analyzer</h1>
-  <p>Static Code Analysis Tool — McCabe Complexity & LOC Metrics</p>
+  <p>Perkakas Analisis Kode Statis — Kompleksitas McCabe & Metrik LOC</p>
 </div>
 """, unsafe_allow_html=True)
 
 # ── SIDEBAR: Project Info & Parameters ──────
 with st.sidebar:
-    st.markdown("### Project Details")
-    project_name = st.text_input("Project Name", value="Software System A")
-    analyst_name = st.text_input("Analyst Name", value="QA Team")
+    st.markdown("### Detail Proyek")
+    project_name = st.text_input("Nama Proyek", value="Sistem Perangkat Lunak A")
+    analyst_name = st.text_input("Nama Analis", value="Tim QA")
     st.divider()
-    st.markdown("### Metric Parameters")
-    input_biaya = st.number_input("Project Budget (Rp)", min_value=0, value=4_000_000, step=100_000, format="%d")
-    input_bug   = st.number_input("Assumed Bugs Count", min_value=0, value=2)
+    st.markdown("### Parameter Metrik")
+    input_biaya = st.number_input("Anggaran Proyek (Rp)", min_value=0, value=4_000_000, step=100_000, format="%d")
+    input_bug   = st.number_input("Perkiraan Jumlah Bug", min_value=0, value=2)
     st.divider()
     st.markdown("""
     <div style="text-align: center; color: #64748b; font-size: 0.75rem; line-height: 1.5;">
@@ -735,19 +735,19 @@ col_left, col_right = st.columns([2, 3], gap="large")
 
 # ── LEFT COLUMN: Code Control Console ────────
 with col_left:
-    st.markdown('<div class="section-label">Code Workspace</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-label">Ruang Kerja Kode</div>', unsafe_allow_html=True)
     
     # Flat Professional Editor Header
     st.markdown("""
     <div class="editor-header">
-        <span class="editor-title">source_code_editor.py</span>
+        <span class="editor-title">editor_kode_sumber.py</span>
     </div>
     """, unsafe_allow_html=True)
     
     code_input = st.text_area(
         "Source Code",
         height=350,
-        placeholder="// Paste your source code here (PHP, Python, JS, C++)\nfunction demo(x) {\n    if (x > 10) {\n        return 'Big';\n    } else {\n        return 'Small';\n    }\n}",
+        placeholder="// Tempelkan kode sumber Anda di sini (PHP, Python, JS, C++)\nfunction demo(x) {\n    if (x > 10) {\n        return 'Besar';\n    } else {\n        return 'Kecil';\n    }\n}",
         label_visibility="collapsed",
     )
     
@@ -756,7 +756,7 @@ with col_left:
     # Action buttons
     col_btn1, col_btn2 = st.columns([3, 1])
     with col_btn1:
-        run_btn = st.button("RUN ANALYSIS", use_container_width=True)
+        run_btn = st.button("JALANKAN ANALISIS", use_container_width=True)
     with col_btn2:
         clear_btn = st.button("RESET", use_container_width=True)
         
@@ -765,14 +765,14 @@ with col_left:
 
 # ── RIGHT COLUMN: Diagnostic Dashboard ──────
 with col_right:
-    st.markdown('<div class="section-label">Diagnostic Analysis</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-label">Hasil Diagnosis Analisis</div>', unsafe_allow_html=True)
     
     if run_btn:
         if not code_input.strip():
-            st.warning("⚠️ Please insert your source code in the workspace first.")
+            st.warning("⚠️ Silakan masukkan kode sumber Anda terlebih dahulu pada ruang kerja.")
             st.stop()
             
-        with st.spinner("Analyzing code complexity..."):
+        with st.spinner("Menganalisis kompleksitas kode..."):
             loc_metrics = calculate_loc_metrics(code_input, input_biaya, input_bug)
             nodes       = segment_code_into_nodes(code_input)
             cc_data     = calculate_cyclomatic_complexity(nodes)
@@ -780,111 +780,111 @@ with col_right:
             cfg_graph   = generate_cfg(nodes)
             
         tab1, tab2, tab3, tab4, tab5 = st.tabs([
-            "LOC METRICS",
-            "CFG DIAGRAM",
-            "MCCABE COMPLEXITY",
-            "BASIS PATHS",
-            "EXPORT REPORT",
+            "METRIK LOC",
+            "DIAGRAM CFG",
+            "KOMPLEKSITAS MCCABE",
+            "JALUR BASIS",
+            "EKSPOR LAPORAN",
         ])
         
-        # ── TAB 1: LOC METRICS ──
+        # ── TAB 1: METRIK LOC ──
         with tab1:
-            st.markdown("### Code Density (Lines of Code)")
-            st.markdown('<div class="formula-box">LOC = Raw Lines − Blank Lines − Comment Lines<br>KLOC = LOC / 1000<br>Cost/LOC = Total Budget / Raw Lines</div>', unsafe_allow_html=True)
+            st.markdown("### Kepadatan Kode (Lines of Code)")
+            st.markdown('<div class="formula-box">LOC = Baris Kasar − Baris Kosong − Baris Komentar<br>KLOC = LOC / 1000<br>Biaya/LOC = Total Anggaran / Baris Kasar</div>', unsafe_allow_html=True)
             
             c1, c2, c3, c4 = st.columns(4)
             with c1:
-                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Total Baris Kasar"]}</div><div class="lbl">Raw Lines</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Total Baris Kasar"]}</div><div class="lbl">Baris Kasar</div></div>', unsafe_allow_html=True)
             with c2:
-                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Baris Kosong"]}</div><div class="lbl">Blank Lines</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Baris Kosong"]}</div><div class="lbl">Baris Kosong</div></div>', unsafe_allow_html=True)
             with c3:
-                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Baris Komentar"]}</div><div class="lbl">Comment Lines</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Baris Komentar"]}</div><div class="lbl">Baris Komentar</div></div>', unsafe_allow_html=True)
             with c4:
-                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Nilai LOC"]}</div><div class="lbl">LOC Value</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Nilai LOC"]}</div><div class="lbl">Nilai LOC</div></div>', unsafe_allow_html=True)
                 
             st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
             
             c5, c6, c7 = st.columns(3)
             with c5:
-                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Nilai KLOC"]:.4f}</div><div class="lbl">KLOC Value</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Nilai KLOC"]:.4f}</div><div class="lbl">Nilai KLOC</div></div>', unsafe_allow_html=True)
             with c6:
-                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Kesalahan per KLOC"]}</div><div class="lbl">Bugs / KLOC</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{loc_metrics["Kesalahan per KLOC"]}</div><div class="lbl">Kesalahan / KLOC</div></div>', unsafe_allow_html=True)
             with c7:
-                st.markdown(f'<div class="metric-card"><div class="val">Rp {loc_metrics["Biaya per LOC"]:,.0f}</div><div class="lbl">Cost / LOC</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">Rp {loc_metrics["Biaya per LOC"]:,.0f}</div><div class="lbl">Biaya / LOC</div></div>', unsafe_allow_html=True)
 
         # ── TAB 2: CFG & NODE TABLE ──
         with tab2:
-            st.markdown("### Control Flow Graph & Node Segmentation")
+            st.markdown("### Control Flow Graph (CFG) & Segmentasi Node")
             col_cfg, col_tbl = st.columns([1, 1], gap="medium")
             
             with col_cfg:
                 st.graphviz_chart(cfg_graph, use_container_width=True)
-                st.caption("🟡 Yellow = Decision Node (Predicate)  |  🔵 Blue = Process Node  |  ⬛ START/END")
+                st.caption("🟡 Kuning = Node Keputusan (Predikat)  |  🔵 Biru = Node Proses  |  ⬛ MULAI/SELESAI")
                 
             with col_tbl:
-                st.markdown("#### Segmented Node Details")
+                st.markdown("#### Detail Segmentasi Node")
                 if nodes:
                     import pandas as pd
                     df = pd.DataFrame([{
                         "Node": n["node_id"],
-                        "Type": "Decision" if n["node_type"] == "decision" else "Process",
-                        "Lines Range": f"{n['start_line']} - {n['end_line']}",
-                        "Preview": n["lines_preview"],
+                        "Tipe": "Keputusan" if n["node_type"] == "decision" else "Proses",
+                        "Rentang Baris": f"{n['start_line']} - {n['end_line']}",
+                        "Pratinjau": n["lines_preview"],
                     } for n in nodes])
                     st.dataframe(df, use_container_width=True, hide_index=True)
                 else:
-                    st.info("No nodes segmented.")
+                    st.info("Tidak ada node yang terfragmentasi.")
 
         # ── TAB 3: CYCLOMATIC COMPLEXITY ──
         with tab3:
-            st.markdown("### McCabe Cyclomatic Complexity Analysis")
-            st.markdown('<div class="formula-box">V(G) = P + 1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P = Decision / Predicate Nodes Count)<br>V(G) = E − N + 2 &nbsp;&nbsp;(E = Edges Count, N = Nodes Count)</div>', unsafe_allow_html=True)
+            st.markdown("### Analisis Kompleksitas Siklomatis McCabe")
+            st.markdown('<div class="formula-box">V(G) = P + 1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(P = Jumlah Node Keputusan / Predikat)<br>V(G) = E − N + 2 &nbsp;&nbsp;(E = Jumlah Sisi / Edge, N = Jumlah Simpul / Node)</div>', unsafe_allow_html=True)
             
             c1, c2, c3, c4 = st.columns(4)
             with c1:
-                st.markdown(f'<div class="metric-card"><div class="val">{cc_data["N"]}</div><div class="lbl">Nodes (N)</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{cc_data["N"]}</div><div class="lbl">Node (N)</div></div>', unsafe_allow_html=True)
             with c2:
-                st.markdown(f'<div class="metric-card"><div class="val">{cc_data["E"]}</div><div class="lbl">Edges (E)</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{cc_data["E"]}</div><div class="lbl">Edge (E)</div></div>', unsafe_allow_html=True)
             with c3:
-                st.markdown(f'<div class="metric-card"><div class="val">{cc_data["P"]}</div><div class="lbl">Predicates (P)</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{cc_data["P"]}</div><div class="lbl">Predikat (P)</div></div>', unsafe_allow_html=True)
             with c4:
-                st.markdown(f'<div class="metric-card"><div class="val">{cc_data["CC"]}</div><div class="lbl">Complexity V(G)</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="metric-card"><div class="val">{cc_data["CC"]}</div><div class="lbl">Kompleksitas V(G)</div></div>', unsafe_allow_html=True)
                 
             st.markdown(f"""
             <div class="risk-card" style="border-left: 4px solid {cc_data['risk_color']};">
                 <div style="font-size:1.05rem; font-weight:700; color:{cc_data['risk_color']}; letter-spacing:0.02em; display: flex; align-items: center; gap: 8px;">
-                    ● RISK STATUS: {cc_data['risk_level']}
+                    ● STATUS RISIKO: {cc_data['risk_level']}
                 </div>
                 <div style="margin-top:8px; color:#334155; font-size:0.9rem; line-height:1.5;">
                     {cc_data['desc']}
                 </div>
                 <div style="margin-top:12px; font-size:0.8rem; color:#64748b;">
-                    Complexity value of <strong>{cc_data['CC']}</strong> indicates that at least 
-                    <strong>{cc_data['CC']} independent paths</strong> must be covered in test cases.
+                    Nilai kompleksitas sebesar <strong>{cc_data['CC']}</strong> menandakan bahwa setidaknya 
+                    <strong>{cc_data['CC']} jalur independen</strong> harus dicakup oleh pengujian kasus uji (test cases).
                 </div>
             </div>
             """, unsafe_allow_html=True)
 
         # ── TAB 4: BASIS PATH TESTING ──
         with tab4:
-            st.markdown("### Independent Logical Basis Paths")
-            st.info(f"V(G) complexity formula requires **{cc_data['CC']} independent paths** to be fully covered:")
+            st.markdown("### Jalur Basis Logika Independen (Independent Basis Paths)")
+            st.info(f"Formula kompleksitas V(G) mewajibkan setidaknya **{cc_data['CC']} jalur independen** di bawah ini untuk diuji sepenuhnya:")
             
             if paths:
                 import pandas as pd
                 df_paths = pd.DataFrame([{
-                    "Path ID": f"P{p['path_no']}",
-                    "Description": p["description"],
-                    "Node Sequence": " ➔ ".join(p["sequence"]),
+                    "ID Jalur": f"P{p['path_no']}",
+                    "Deskripsi": p["description"],
+                    "Urutan Node": " ➔ ".join(p["sequence"]),
                 } for p in paths])
                 st.dataframe(df_paths, use_container_width=True, hide_index=True)
             else:
-                st.warning("Basis paths could not be evaluated.")
+                st.warning("Jalur basis tidak dapat dievaluasi.")
 
         # ── TAB 5: EXPORT REPORT ──
         with tab5:
-            st.markdown("### Export Quality Report")
-            st.success("Analysis complete! You can download the reports as print-friendly HTML page or JSON raw data below:")
+            st.markdown("### Ekspor Laporan Kualitas")
+            st.success("Analisis selesai! Anda dapat mengunduh hasil laporan dalam bentuk halaman HTML siap cetak atau data mentah JSON di bawah ini:")
             
             try:
                 cfg_svg_bytes = cfg_graph.pipe(format='svg')
@@ -902,7 +902,7 @@ with col_right:
             col_dl1, col_dl2 = st.columns(2)
             with col_dl1:
                 st.download_button(
-                    label="DOWNLOAD HTML REPORT (PRINT-READY)",
+                    label="UNDUH LAPORAN HTML (SIAP CETAK)",
                     data=html_report.encode("utf-8"),
                     file_name=f"laporan_wbt_{project_name.replace(' ','_')}.html",
                     mime="text/html",
@@ -911,7 +911,7 @@ with col_right:
                 )
             with col_dl2:
                 st.download_button(
-                    label="DOWNLOAD RAW JSON DATA",
+                    label="UNDUH DATA MENTAH JSON",
                     data=json.dumps({
                         "project": project_name,
                         "analyst": analyst_name,
@@ -926,15 +926,15 @@ with col_right:
                 )
                 
             st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
-            st.markdown("#### Print Report Page Preview:")
+            st.markdown("#### Pratinjau Halaman Cetak Laporan:")
             st.markdown(f"<div class='report-preview-container' style='border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;'>{html_report}</div>", unsafe_allow_html=True)
 
     else:
         # Initial Placeholder design - Clean & Professional White Card
         st.markdown("""
         <div class="waiting-card">
-            <h3>Waiting for Code Input</h3>
-            <p>Please insert your source code in the <strong>Code Workspace</strong> on the left,<br>
-            then click <strong>RUN ANALYSIS</strong> to run complete White Box metrics.</p>
+            <h3>Menunggu Input Kode</h3>
+            <p>Silakan masukkan kode sumber Anda pada <strong>Ruang Kerja Kode</strong> di sebelah kiri,<br>
+            kemudian klik tombol <strong>JALANKAN ANALISIS</strong> untuk memproses metrik White Box lengkap.</p>
         </div>
         """, unsafe_allow_html=True)
