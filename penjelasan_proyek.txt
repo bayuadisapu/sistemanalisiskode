@@ -1,0 +1,93 @@
+================================================================================
+          DOKUMENTASI SINGKAT: WHITE BOX TESTING ANALYZER
+================================================================================
+
+Aplikasi ini adalah perkakas analisis kode statis (static code analyzer) yang
+berfungsi membantu penguji (QA) dan pengembang dalam memetakan kompleksitas
+logika pemrograman, memvisualisasikan alur kontrol program, serta merencanakan 
+skenario pengujian unit (unit testing) berdasarkan metodologi White Box Testing.
+
+--------------------------------------------------------------------------------
+1. FITUR UTAMA APLIKASI
+--------------------------------------------------------------------------------
+* Ruang Kerja Kode (Code Workspace)
+  Tempat menempelkan atau mengetik kode sumber (mendukung PHP, Python, JS, C++).
+* Metrik LOC (Lines of Code)
+  Menghitung kepadatan baris kode secara detail:
+  - Baris Kasar (Total Raw Lines)
+  - Baris Kosong (Blank Lines)
+  - Baris Komentar (Comment Lines)
+  - Nilai LOC Bersih (LOC Value)
+  - Perhitungan estimasi bug per 1000 baris kode (KLOC)
+  - Analisis biaya ekonomis per baris kode berdasarkan anggaran proyek.
+* Diagram CFG (Control Flow Graph)
+  Visualisasi graf alur logika program secara interaktif:
+  - Node Kuning: Node keputusan/percabangan (Predicate Node)
+  - Node Biru: Node eksekusi/proses biasa (Process Node)
+  - Node Hitam: Pintu masuk awal (START) dan pintu keluar akhir (END).
+* Analisis Kompleksitas McCabe
+  Menghitung nilai Kompleksitas Siklomatis V(G) untuk menentukan tingkat risiko
+  kode (Rendah, Sedang, Tinggi) beserta deskripsi penjelasan risikonya.
+* Jalur Basis Independen (Independent Basis Paths)
+  Menghasilkan daftar rute logis independen minimum yang wajib dicakup oleh 
+  kasus uji coba (test cases) untuk menjamin cakupan kode 100%.
+* Ekspor Laporan Premium
+  Menghasilkan laporan kualitas kode digital interaktif berstandar cetak (HTML)
+  dan data format terstruktur (JSON).
+
+--------------------------------------------------------------------------------
+2. LOGIKA UTAMA PROGRAM
+--------------------------------------------------------------------------------
+Aplikasi bekerja menggunakan 4 logika pemrosesan utama di balik layar:
+
+a. Logika LOC (Line Counter Logic)
+   - String kode sumber dipecah menjadi larik baris menggunakan karakter '\n'.
+   - Setiap baris yang kosong setelah dihapus spasi luarnya dianggap Baris Kosong.
+   - Baris yang diawali oleh tag komentar seperti //, #, /*, *, <!-- dianggap Baris Komentar.
+   - Baris sisanya dihitung sebagai LOC Bersih.
+
+b. Logika Segmentasi Node (Node Segmentation)
+   - Kode dibaca baris-demi-baris menggunakan Regular Expression (Regex).
+   - Baris yang mengandung kata kunci kendali percabangan seperti 'if', 'else if',
+     'for', 'while', 'switch', dan 'catch' diidentifikasi sebagai Decision Node (Node Keputusan).
+   - Kumpulan baris eksekusi di antara percabangan tersebut dikelompokkan secara 
+     otomatis menjadi Process Node (Node Proses).
+
+c. Logika Kompleksitas Siklomatis McCabe
+   - Kompleksitas V(G) dihitung berdasarkan jumlah simpul keputusan yang terdeteksi.
+   - Formula yang digunakan: V(G) = P + 1 
+     Dimana P adalah jumlah Predikat/Simpul Keputusan (Decision Node).
+   - Nilai V(G) inilah yang menentukan jumlah jalur independen minimum.
+
+d. Logika CFG & Jalur Basis
+   - Menghubungkan satu node ke node berikutnya secara berurutan membentuk Sisi (Edges).
+   - Jika mendeteksi Decision Node, alur akan bercabang menjadi 2 arah (Jalur Benar & Salah).
+   - Graphviz merelasikan node-node tersebut dalam format graf DOT string untuk dirender.
+   - Algoritma khusus kemudian memetakan seluruh variasi jalur independen dari 
+     titik START hingga titik END.
+
+--------------------------------------------------------------------------------
+3. ALUR KERJA APLIKASI (WORKFLOW)
+--------------------------------------------------------------------------------
+[INPUT PENGGUNA]
+ 1. Pengguna memasukkan data administratif proyek (Nama Proyek, Analis, Budget, 
+    dan Estimasi Bug) pada sidebar kiri.
+ 2. Pengguna menempelkan kode fungsi pemrograman pada Ruang Kerja Kode di kiri.
+ 3. Pengguna menekan tombol "JALANKAN ANALISIS".
+
+[PROSES SISTEM]
+ 4. Sistem memeriksa validitas kode (tidak boleh kosong).
+ 5. Sistem menjalankan fungsi `calculate_loc_metrics()` untuk menghitung LOC.
+ 6. Sistem memotong kode menjadi serpihan node lewat `segment_code_into_nodes()`.
+ 7. Sistem menghitung indeks McCabe dan tingkat risiko melalui `calculate_cyclomatic_complexity()`.
+ 8. Sistem merancang visualisasi graf CFG menggunakan `generate_cfg()`.
+ 9. Sistem memetakan daftar jalur test lewat `generate_independent_paths()`.
+
+[OUTPUT PENGGUNA]
+10. Kolom kanan (Diagnosis) langsung terisi oleh 5 tab laporan interaktif.
+11. Pengguna dapat meninjau grafik, melihat rincian node, membaca status risiko,
+    serta mengunduh file laporan HTML siap cetak atau JSON data.
+
+================================================================================
+               Dibuat secara profesional oleh bayuadisaputro studio dev
+================================================================================
